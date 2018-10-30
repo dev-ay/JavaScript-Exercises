@@ -1,0 +1,85 @@
+<!-- This exercise demonstrates getElementsByClass which
+     returns an array of element objects in order of appearance. 
+     Each element can then modify properties by its index. -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        div {
+            color:white;
+            font-size:1.5em;
+            font-weight:bold;
+            text-align:center;
+            width:400px;
+            background-color: green;
+            padding-top: 30px; 
+            padding-bottom: 30px;
+        }
+
+        button {
+            font-size: 1.5em;
+            font-weight:bold;
+            height:75px;
+            width:200px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="colors">Click button for colors!</h1>
+    <div>Green</div><br>
+    <div>Green</div><br>
+    <div>Green</div><br>
+    <div>Green</div><br>
+    <div>Green</div><br><br>
+    <button class="btn" onclick="up()">Turn Red!</button>
+    <button class="btn" onclick="down()">Turn Blue!</button>
+
+
+    <script>
+        var i=0;
+        var j=0;
+        var divs = document.getElementsByTagName('div');
+        var btns = document.getElementsByClassName('btn');
+
+        function up() {
+        	btns[1].innerHTML = "Turn Blue!";
+            btns[1].style.color = "Black";
+            if(i<divs.length){
+                divs[i].style.backgroundColor = "Red";
+                divs[i].innerHTML = "Red";
+                btns[0].innerHTML = "Done";
+                btns[0].style.color = "red";
+                i++;
+                if(i<divs.length){
+                	window.setTimeout(up,150);
+                }
+            }
+            if(i==divs.length){
+            	i=0;
+            }
+           
+        }
+        function down() {
+        	btns[0].innerHTML = "Turn Red!";
+            btns[0].style.color = "Black";
+            if(j<divs.length) {
+                divs[j].style.backgroundColor = "Blue";
+                divs[j].innerHTML = "Blue";
+                btns[1].innerHTML = "Done";
+                btns[1].style.color = "Blue";
+                j++;
+                if(j<divs.length){
+                	window.setTimeout(down,150);
+                }
+            }
+            if(j==divs.length){
+            	j=0;
+            }
+        }
+    </script>
+</body>
+
+
+</html>

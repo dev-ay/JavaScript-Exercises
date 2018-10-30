@@ -1,0 +1,46 @@
+<!-- This Exercise demonstrates using onclick and getElementById()
+     for basic user interactivity.  Also implements recursion by using
+     setTimeout() instead of a loop.  -->
+<!DOCTYPE html>
+<html>
+
+    <head> 
+        <style>
+            button {
+                font-size:1.5em;
+                font-weight: bold;
+                height:75px;
+                width:200px;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <h1 id="countdown">Click button for countdown!</h1>
+        <br><br>
+        <button id="btn" onclick="up()">Start!</button>
+
+        <script>
+            var i=0;
+            var myArray = [10,9,8,7,6,5,4,3,2,1,"Happy New Year!"];
+            function up() {
+                if(i==0) {
+                    document.getElementById('btn').innerHTML = "...Counting";
+                }
+                if(i<myArray.length) {
+                    document.getElementById('countdown').style.color = "Blue";
+                    document.getElementById('countdown').innerHTML = myArray[i];
+                    i++;
+                    if(i<myArray.length){window.setTimeout(up,100);}
+                }
+                if(i==myArray.length){
+                    i=0;
+                    document.getElementById('btn').innerHTML = "Start Again";
+                }
+            }
+
+        </script>
+
+    </body>
+</html> 
