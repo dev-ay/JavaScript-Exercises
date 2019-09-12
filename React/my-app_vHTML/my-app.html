@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <script src="https://unpkg.com/react@16.9.0/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16.9.0/umd/react-dom.development.js" crossorigin></script>
+		<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+		        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    </head>
+    <body>
+		<div id="root"></div>
+        <script type="text/babel">
+			class App extends React.Component {
+
+			  constructor(props) {
+				super(props);
+				this.state = {
+				  movies: [],
+				};
+			  }
+
+			  async componentDidMount() {
+				let resp = await fetch('https://api.airtable.com/v0/appEHt3ETioLEdnJV/favorites?api_key=keyB5dWzkyskZW2Vr');
+				let data = await resp.json();
+				this.setState({ movies: data.records });
+				console.log(data.records);
+			  }
+
+			  render() {
+				return (
+				  <div className="container mt-5">
+					<div className="row">
+					  <div className="col">
+						<div className="card-deck">
+						  {this.state.movies.map(movie => <MovieCard {...movie.fields} /> )}
+						</div>
+					  </div>
+					</div>
+				  </div>
+
+				);
+			  }
+
+			}
+
+
+			const MovieCard = ({ title, year, description, imageURL }) => (
+			  <div className="card">
+				<img className="card-img-top" src={imageURL[0].url} alt="Movie Poster" />
+				<div className="card-body">
+				  <h5 className="card-title">{title}</h5>
+				  <p className="card-text">{description}</p>
+				  <p className="card-text">
+					<small className="text-muted">{year}</small>
+				  </p>
+				</div>
+			  </div>
+			);
+
+			ReactDOM.render(<App />, document.getElementById('root'));
+        </script>
+    </body>
+</html>

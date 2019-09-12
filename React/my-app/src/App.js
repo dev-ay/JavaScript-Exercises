@@ -10,7 +10,7 @@ class App extends Component {
       movies: [],
     };
   }
-
+/* 
   componentDidMount() {
     fetch('https://api.airtable.com/v0/appEHt3ETioLEdnJV/favorites?api_key=keyB5dWzkyskZW2Vr')
     .then((resp) => resp.json())
@@ -20,6 +20,14 @@ class App extends Component {
       // Error 🙁
     });
   }
+   */
+  async componentDidMount() {
+    let resp = await fetch('https://api.airtable.com/v0/appEHt3ETioLEdnJV/favorites?api_key=keyB5dWzkyskZW2Vr');
+    let data = await resp.json();
+	this.setState({ movies: data.records });
+    
+  }
+
 
   render() {
     return (
@@ -37,6 +45,11 @@ class App extends Component {
   }
 
 }
+
+
+
+
+
 
 export default App;
 
